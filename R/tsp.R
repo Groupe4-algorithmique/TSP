@@ -1,3 +1,6 @@
+#' @description Sorting by insertion
+#' @param G an unsorted vector of numeric data
+#' @return the sorted vector
 compute_distance <- function(G,cities,start_city){
   n = length(cities)
   distance = G[start_city,cities[1]]
@@ -123,13 +126,23 @@ search_min_C_S_k <- function(C_S_k){
   return(list(c_s_k=C_S_k[[m_0]],m=as.integer(m_0)))
 }
 
-test_compare <- function(n){
+generateDistance=function(n,minDistance,maxDistance){
+  G=matrix( rep( 0, len=n*n), nrow = n)
+  for(i in 1:(n-1)){
+    for(j in (i+1):n){
+      G[i,j]= sample(minDistance:maxDistance, 1)
+      G[j,i]=G[i,j]
+    }
+  }
+  return(G)
+}
+test_compare <- function(n,min_dist,max_dist){
   #tmp = sample.int(5, n*n, replace = TRUE)
-  tmp =  runif(n*n,1,10)
-  G = matrix(tmp,nrow=n,ncol=n)
-  G = G %*% t(G)
-  #G = matrix(c(0,1,15,6,2,0,7,3,9,6,0,12,10,4,8,0),nrow=4,ncol=4)
-  diag(G) = 0
+  # =  runif(n*n,1,10)
+  #G = matrix(tmp,nrow=n,ncol=n)
+  #G = G %*% t(G)
+  #G = matrix(c(0,1,15,6,2,0,7,3,9,6,0,12,10,4,8,0),nrow=n,ncol=n)
+  G = generateDistance(n,min_dist,max_dist)
   print(G)
   print('-----------------')
   print('held_karp')
