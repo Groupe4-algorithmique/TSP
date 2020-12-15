@@ -128,16 +128,24 @@ test_compare <- function(n){
   tmp =  runif(n*n,1,10)
   G = matrix(tmp,nrow=n,ncol=n)
   G = G %*% t(G)
-  #G = matrix(c(0,1,15,6,2,0,7,3,9,6,0,12,10,4,8,0),nrow=n,ncol=n)
+  #G = matrix(c(0,1,15,6,2,0,7,3,9,6,0,12,10,4,8,0),nrow=4,ncol=4)
   diag(G) = 0
   print(G)
   print('-----------------')
   print('held_karp')
+  ptm <- proc.time()
   hp = held_karp(G,n)
+  time_hp = proc.time()-ptm
+  print(paste('Temps pour finir Held-karp',time_hp['elapsed']))
   print(hp$path_optimal)
   print('-----------------')
   print('All permutations test')
+  
+  ptm <- proc.time()
   nm = naive_method(G,c(2:n),1)
+  time_nv = proc.time()-ptm
+  
+  print(paste('Temps pour tester toutes les permutations',time_nv['elapsed']))#end_time1-start_time1))
   print(nm$path_optimal)
   print('-----------------')
   print(paste('distance optimal avec Held_karp ',compute_distance(G,hp$path_optimal,1)))
