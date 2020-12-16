@@ -45,7 +45,7 @@ naive_method <- function(G,cities,start_city){
 }
 
 
-sget_subsets <- function(set,p){
+get_subsets <- function(set,p){
   subsets = list()
   for (i in 1:(2^length(set))){
     t = i
