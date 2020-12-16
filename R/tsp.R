@@ -1,6 +1,8 @@
-#' @description Sorting by insertion
-#' @param G an unsorted vector of numeric data
-#' @return the sorted vector
+#' @function compute_distance
+#' @param G : la matrice des distances
+#' @param cities : vecteur des villes à visiter
+#' @param start_city : la ville de début du voyage.
+#' @return (la distance totale parcourue)
 compute_distance <- function(G,cities,start_city){
   n = length(cities)
   distance = G[start_city,cities[1]]
@@ -10,6 +12,12 @@ compute_distance <- function(G,cities,start_city){
   return(distance + G[cities[n],start_city])
 }
 
+#' @function naive_method
+#' Test de toutes les permutations possibles.
+#' @param G : la matrice des distances.
+#' @param cities : vecteur des villes à visiter.
+#' @param start_city : la ville de début du voyage.
+#' @return (la séquence des villes qui donnent la moindre en distance.)
 naive_method <- function(G,cities,start_city){
   n = length(cities)
   c = rep(1,n)
@@ -28,8 +36,8 @@ naive_method <- function(G,cities,start_city){
             cities[c[i]] = cities[i]
             cities[i] = tmp
         }
+        # On compare la nouvelle permutation avec la précédente.
         if ( compute_distance(G,cities,start_city) < dist_optimal){
-
             path_optimal = cities
             dist_optimal = compute_distance(G,path_optimal,start_city)
         }
@@ -44,7 +52,13 @@ naive_method <- function(G,cities,start_city){
   return(list(path_optimal=path_optimal,dist_optimal=dist_optimal))
 }
 
+##########################################################################
 
+#' @function get_subsets
+#' Génère toutes les sous partitions de taille p d'un groupe de taille n.
+#' @param set : le groupe initial.
+#' @param p : la taille des partitions qu'on veut extraire de 'set'.
+#' @return (l'ensemble des partitions de taille p du groupe 'set')
 get_subsets <- function(set,p){
   subsets = list()
   for (i in 1:(2^length(set))){
@@ -63,6 +77,43 @@ get_subsets <- function(set,p){
   return(subsets)
 }
 
+#' @function construct_C_S_k
+#' @param C : la matrice tel que C[S,k] le coût min du chemin à partir de 1 et se termine au 
+#' sommet k, passant les sommets de l'ensemble S exactement une fois.
+#' @param Subset : Un sous groupe du groupe complet des villes.
+#' @param k : La ville pour laquelle on veut calculer C[S-k,m] pour tout m dans Subset.
+#' @param G : la matrice des distances.
+#' @return (la liste [C(S\{k}, m) + G[m,k]] pour tout m dans 'Subset')
+construct_C_S_k <- function(C,Subset,k,G){
+  C_S_k = list()
+  S_k  = Subset[Subset!=k]
+  row_S_k = paste(unlist(S_k), collapse='')
+  for (m in Subset){
+    if (m!=k){
+      C_S_k[as.character(m)] = C[row_S_k,m] + G[m,k]
+    }
+  }
+  return(C_S_k)
+}
+
+#' @function search_min_C_S_k
+#' @param C_S_k : Une liste construit par la fonction 'construct_C_S_k'.
+#' @return (le minimum du vectur et l'index du minimum)
+search_min_C_S_k <- function(C_S_k){
+  m_0 = names(C_S_k)[1]
+  for (m in names(C_S_k)){
+    if (C_S_k[[m]]  < C_S_k[[m_0]]){
+      m_0=m
+    }
+  }
+  return(list(c_s_k=C_S_k[[m_0]],m=as.integer(m_0)))
+}
+
+#' @function held_karp
+#' L'algorithme de Held_karp.
+#' @param G : la matrice des distances.
+#' @param n : le nombre de villes.
+#' @return (la séquence des villes qui donnent la moindre en distance.)
 held_karp <- function(G,n){
   C = matrix(Inf,nrow=0,ncol=n)
   C = data.frame(C)
@@ -104,29 +155,13 @@ held_karp <- function(G,n){
   return(list(dist_opt=dist_opt,path_optimal=rev(path_optimal)))
 }
 
-construct_C_S_k <- function(C,Subset,k,G){
-  C_S_k = list()
-  S_k  = Subset[Subset!=k]
-  row_S_k = paste(unlist(S_k), collapse='')
-  for (m in Subset){
-    if (m!=k){
-      C_S_k[as.character(m)] = C[row_S_k,m] + G[m,k]
-    }
-  }
-  return(C_S_k)
-}
-
-search_min_C_S_k <- function(C_S_k){
-  m_0 = names(C_S_k)[1]
-  for (m in names(C_S_k)){
-    if (C_S_k[[m]]  < C_S_k[[m_0]]){
-      m_0=m
-    }
-  }
-  return(list(c_s_k=C_S_k[[m_0]],m=as.integer(m_0)))
-}
-
-generateDistance=function(n,minDistance,maxDistance){
+#' @function generateDistances
+#' Génère une distance de matrice aleatoirement.
+#' @param n : le nombre des villes.
+#' @param minDistance : le min des distance à ne pas depasser.
+#' @param maxDistance : le max des distance à ne pas depasser.
+#' @return (la séquence des villes qui donnent la moindre en distance.)
+generateDistances <- function(n,minDistance,maxDistance){
   G=matrix( rep( 0, len=n*n), nrow = n)
   for(i in 1:(n-1)){
     for(j in (i+1):n){
@@ -136,32 +171,40 @@ generateDistance=function(n,minDistance,maxDistance){
   }
   return(G)
 }
+
+#' @function test_compare
+#' Comparaison entre la méthode naïve et Held-Karp.
+#' Affiche le temps pris par les deux méthodes et les chemins optimaux obtenus et les distances associées.  
+#' @param n : le nombre des villes.
+#' @param minDistance : le min des distance à ne pas depasser.
+#' @param maxDistance : le max des distance à ne pas depasser.
+#' @return
 test_compare <- function(n,min_dist,max_dist){
   #tmp = sample.int(5, n*n, replace = TRUE)
   # =  runif(n*n,1,10)
   #G = matrix(tmp,nrow=n,ncol=n)
   #G = G %*% t(G)
   #G = matrix(c(0,1,15,6,2,0,7,3,9,6,0,12,10,4,8,0),nrow=n,ncol=n)
-  G = generateDistance(n,min_dist,max_dist)
+  G = generateDistances(n,min_dist,max_dist)
   print(G)
   print('-----------------')
   print('held_karp')
   ptm <- proc.time()
   hp = held_karp(G,n)
   time_hp = proc.time()-ptm
-  print(paste('Temps pour finir Held-karp',time_hp['elapsed']))
+  print(paste('Temps pour finir Held-karp ',time_hp['elapsed']))
   print(hp$path_optimal)
   print('-----------------')
-  print('All permutations test')
+  print('Test de toutes les permutations ')
   
   ptm <- proc.time()
   nm = naive_method(G,c(2:n),1)
   time_nv = proc.time()-ptm
   
-  print(paste('Temps pour tester toutes les permutations',time_nv['elapsed']))#end_time1-start_time1))
+  print(paste('Temps pour tester toutes les permutations ',time_nv['elapsed']))#end_time1-start_time1))
   print(nm$path_optimal)
   print('-----------------')
   print(paste('distance optimal avec Held_karp ',compute_distance(G,hp$path_optimal,1)))
-  print(paste('distance optimal avec tout les tests',compute_distance(G,nm$path_optimal,1)))
+  print(paste('distance optimal avec tous les tests ',compute_distance(G,nm$path_optimal,1)))
 }
 
