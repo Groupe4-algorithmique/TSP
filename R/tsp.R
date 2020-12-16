@@ -26,7 +26,7 @@ naive_method <- function(G,cities,start_city){
   path_optimal = cities
   while (i < n+1){
     if (c[i] < i){
-        if (i %% 2 == 1 ){
+        if (i %% 2 == 1 ){ ## plus de documentation
             tmp = cities[1]
             cities[1] = cities[i]
             cities[i] = tmp
