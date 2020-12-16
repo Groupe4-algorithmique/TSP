@@ -6,15 +6,15 @@
 
 ## function algorithm TSP (G, n):
     for k := 2 to n do 
-      C({k}, k) := d1,k 
+      C({k}, k) := G[1, k] 
     end for 
     for s := 2 to n−1 do 
         for all S ⊆ {2, . . . , n}, |S| = s do 
           for all k ∈ S do 
-              C(S, k) := minm≠k,m∈S [C(S\{k}, m) + dm,k] 
+              C(S, k) := min_{m≠k,m∈S} [C(S\{k}, m) + G[m,k] ]
           end for 
         end for 
     end for 
-    opt := min_{k≠1} [C({2, 3, . . . , n}, k) + dk, 1] 
+    opt := min_{k≠1} [C({2, 3, . . . , n}, k) + G[k, 1] ] 
     return (opt) 
 ## end function 
