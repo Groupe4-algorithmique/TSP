@@ -1,7 +1,7 @@
 # Problème du voyageur de commerce :
 #### Dossier R, contient Un script R pour la méthode naïve et la méthode performante pour l'algorithme Held-Karp.
 #### La méthode naïve consiste à tester toutes les permutations possibles des villes et garder la permutation qui donne le chemin le moins chère pour le voyageur, cette méthode à une complexité de O(n!).
-## function Naive_Methode(G, n):
+#### function Naive_Methode(G, n):
     Permutation_0 = une permutation initiale.
     Distance_0 = Distance obtenue pour Permutation_0. 
     for new_permutation in permutations do :
@@ -12,11 +12,11 @@
         end if
     end for
     return(Permutation_0,Distance_0)  
-## end function 
+#### end function 
 
 #### La méthode de Held-Karp est décrite sur https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm, sa complexité est de O(2^n n^2).
 
-## function Held_Karp(G, n):
+#### function Held_Karp(G, n):
     for k := 2 to n do 
       C({k}, k) := G[1, k] 
     end for 
@@ -29,4 +29,4 @@
     end for 
     opt := min_{k≠1} [C({2, 3, . . . , n}, k) + G[k, 1] ] 
     return (opt) 
-## end function 
+#### end function 
