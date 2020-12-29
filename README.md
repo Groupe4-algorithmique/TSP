@@ -26,11 +26,11 @@ library("tspp")
     return(Permutation_0,Distance_0)  
 #### end function 
 
-La méthode de Held-Karp est décrite sur https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm, sa complexité est de<img src="https://render.githubusercontent.com/render/math?math= O(2^n n^2)">.
+La méthode de Held-Karp est décrite sur https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm, sa complexité est de <img src="https://render.githubusercontent.com/render/math?math=O(2^n n^2)">.
 
-On note les villes 1, 2,. . .,n et supposons que nous commençons à la ville 1, et on note G la matrice des distances entre les villes, Alors la distance entre la ville i et la ville j est <img src="https://render.githubusercontent.com/render/math?math= G_{i,j}"> .
+On note les villes 1, 2,. . .,n et supposons que nous commençons à la ville 1, et on note G la matrice des distances entre les villes, Alors la distance entre la ville i et la ville j est <img src="https://render.githubusercontent.com/render/math?math=G_{i,j}"> .
 
-Considérons les sous-groupes <img src="https://render.githubusercontent.com/render/math?math= S \subseteq \{2,..,n}"> , et pour k ∈ S, soit C(S,k) la distance minimale commençant à la ville 1 en visitant toutes les villes de S et se terminant à la ville k . 
+Considérons les sous-groupes <img src="https://render.githubusercontent.com/render/math?math=S \subseteq \{2,..,n}"> , et pour k ∈ S, soit C(S,k) la distance minimale commençant à la ville 1 en visitant toutes les villes de S et se terminant à la ville k . 
 
 ##### Première phase: Si S = {k}, alors C(S,k) = G[1,k]. 
 #####                 Sinon: C(S,k)= min x∈{S-k} ( C( S-k,x) + G[x,k] ). (S-k i.e l'ensemble S sauf la ville k)
