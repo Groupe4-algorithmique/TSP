@@ -1,3 +1,6 @@
+![Alt text](/home/imad/Desktop/logo.jpg?raw=true "Optional Title")
+
+
 # Installer le package avec : 
 ```R
 devtools::install_github("Groupe4-algorithmique/TSP")
