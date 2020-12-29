@@ -16,7 +16,8 @@ library("tspp")
 #### La méthode naïve consiste à tester toutes les permutations possibles des villes et garder la permutation qui donne le chemin le moins chère pour le voyageur, cette méthode à une complexité de O(n!).
 #### Cette méthode consiste à commencer par une première permutation initiale aléatoirement et on génère une nouvelle permutation des villes qu'on utilise pour calculer la distance parcourue avec elle et on la compare avec la distance fournie par la permutation précédente, et on garde la permutation qui donne la distance minimale.
 #### On refait le processus jusqu'à l'exploration de toutes les permutations.
-#### function Naive_Methode(G, n):
+```R
+function Naive_Methode(G, n):
     Permutation_0 = une permutation initiale.
     Distance_0 = Distance obtenue pour Permutation_0. 
     for new_permutation in permutations do :
@@ -27,8 +28,8 @@ library("tspp")
         end if
     end for
     return(Permutation_0,Distance_0)  
-#### end function 
-
+end function 
+```
 La méthode de Held-Karp est décrite sur https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm, sa complexité est de
 <img src="https://render.githubusercontent.com/render/math?math=\large O(2^n n^2)">.
 
@@ -41,7 +42,8 @@ Considérons les sous-groupes <img src="https://render.githubusercontent.com/ren
 
 ##### Deuxième phase: la distance minimale pour un tour complet de toutes les villes est M = min k∈{2,..., N}( C({2,...,n},k) + G[k,1] ). 
 
-```C
+```R
+function Held_Karp(G, n):
     for k := 2 to n do 
       C({k}, k) := G[1, k] 
     end for 
@@ -55,5 +57,5 @@ Considérons les sous-groupes <img src="https://render.githubusercontent.com/ren
     end for 
     opt := min_{k≠1} [C({2, 3, . . . , n}, k) + G[k, 1] ] 
     return (opt) 
-    end function 
+ end function 
 ```
