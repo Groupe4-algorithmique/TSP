@@ -30,7 +30,7 @@ library("tspp")
 
 #### On note les villes 1, 2,. . .,n et supposons que nous commençons à la ville 1, et on note G la matrice des distances entre les villes, Alors la distance entre la ville i et la ville j est G[i,j] .
 
-##### Considérons les sous-groupes S ⊆ {2,...,n}, et pour k ∈ S, soit C(S,k) la distance minimale commençant à la ville 1 en visitant toutes les villes de S et se terminant à la ville k . 
+#### Considérons les sous-groupes $$S ⊆ {2,...,n}$$, et pour k ∈ S, soit C(S,k) la distance minimale commençant à la ville 1 en visitant toutes les villes de S et se terminant à la ville k . 
 
 ##### Première phase: Si S = {k}, alors C(S,k) = G[1,k]. 
 #####                 Sinon: C(S,k)= min x∈{S-k} ( C( S-k,x) + G[x,k] ). (S-k i.e l'ensemble S sauf la ville k)
