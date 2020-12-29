@@ -1,6 +1,3 @@
-![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/logo.png?raw=true "Optional Title")
-
-
 # Installer le package avec : 
 ```R
 devtools::install_github("Groupe4-algorithmique/TSP")
@@ -9,6 +6,9 @@ devtools::install_github("Groupe4-algorithmique/TSP")
 ```R
 library("tspp")
 ```
+
+![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/logo.png?raw=true "Optional Title")
+
 
 # Problème du voyageur de commerce :
 #### Le dossier R, contient Un script R pour la méthode naïve et la méthode performante pour l'algorithme Held-Karp.
@@ -41,7 +41,7 @@ Considérons les sous-groupes <img src="https://render.githubusercontent.com/ren
 
 ##### Deuxième phase: la distance minimale pour un tour complet de toutes les villes est M = min k∈{2,..., N}( C({2,...,n},k) + G[k,1] ). 
 
-#### function Held_Karp(G, n):
+```C
     for k := 2 to n do 
       C({k}, k) := G[1, k] 
     end for 
@@ -55,4 +55,5 @@ Considérons les sous-groupes <img src="https://render.githubusercontent.com/ren
     end for 
     opt := min_{k≠1} [C({2, 3, . . . , n}, k) + G[k, 1] ] 
     return (opt) 
-#### end function 
+    end function 
+```
