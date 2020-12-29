@@ -7,7 +7,7 @@ devtools::install_github("Groupe4-algorithmique/TSP")
 library("tspp")
 ```
 
-![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/logo.png?raw=true "Optional Title")
+![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/imgs/image_1.png?raw=true "Optional Title")
 
 
 # Problème du voyageur de commerce :
