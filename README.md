@@ -31,9 +31,9 @@ La méthode de Held-Karp est décrite sur https://en.wikipedia.org/wiki/Held%E2%
 
 On note les villes <img src="https://render.githubusercontent.com/render/math?math=\large \{1,2,..,n\}">et supposons que nous commençons à la ville 1, et on note G la matrice des distances entre les villes, Alors la distance entre la ville i et la ville j est <img src="https://render.githubusercontent.com/render/math?math=\large G_{i,j}"> .
 
-Considérons les sous-groupes <img src="https://render.githubusercontent.com/render/math?math=\large S\subseteq \{2,..,n\}">, et pour <img src="https://render.githubusercontent.com/render/math?math=\large k \in S">, soit <img src="https://render.githubusercontent.com/render/math?math=\large C(S,k)"> la distance minimale commençant à la ville 1 en visitant toutes les villes de S et se terminant à la ville k. 
+Considérons les sous-groupes <img src="https://render.githubusercontent.com/render/math?math=S\subseteq \{2,..,n\}">, et pour <img src="https://render.githubusercontent.com/render/math?math=\large k \in S">, soit <img src="https://render.githubusercontent.com/render/math?math=C(S,k)"> la distance minimale commençant à la ville 1 en visitant toutes les villes de S et se terminant à la ville k. 
 
-##### Première phase: Si <img src="https://render.githubusercontent.com/render/math?math=\large S=\{k\}">, alors <img src="https://render.githubusercontent.com/render/math?math=\large C(S,k) = G_{1,k}">. 
+##### Première phase: Si <img src="https://render.githubusercontent.com/render/math?math=S=\{k\}">, alors <img src="https://render.githubusercontent.com/render/math?math=C(S,k) = G_{1,k}">. 
 #####                 Sinon: C(S,k)= min x∈{S-k} ( C( S-k,x) + G[x,k] ). (S-k i.e l'ensemble S sauf la ville k)
 
 ##### Deuxième phase: la distance minimale pour un tour complet de toutes les villes est M = min k∈{2,..., N}( C({2,...,n},k) + G[k,1] ). 
