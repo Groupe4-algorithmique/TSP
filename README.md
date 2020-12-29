@@ -1,4 +1,4 @@
-![Alt text](/home/imad/Desktop/logo.jpg?raw=true "Optional Title")
+![Alt text](logo.jpg?raw=true "Optional Title")
 
 
 # Installer le package avec : 
