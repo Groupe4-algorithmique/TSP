@@ -8,14 +8,6 @@ library("tspp")
 ```
 
 ![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/imgs/image_1.png?raw=true "Optional Title")
-
-
-# Problème du voyageur de commerce :
-#### Le dossier R, contient Un script R pour la méthode naïve et la méthode performante pour l'algorithme Held-Karp.
-#### 
-#### La méthode naïve consiste à tester toutes les permutations possibles des villes et garder la permutation qui donne le chemin le moins chère pour le voyageur, cette méthode à une complexité de O(n!).
-#### Cette méthode consiste à commencer par une première permutation initiale aléatoirement et on génère une nouvelle permutation des villes qu'on utilise pour calculer la distance parcourue avec elle et on la compare avec la distance fournie par la permutation précédente, et on garde la permutation qui donne la distance minimale.
-#### On refait le processus jusqu'à l'exploration de toutes les permutations.
 ```R
 function Naive_Methode(G, n):
     Permutation_0 = une permutation initiale.
@@ -30,17 +22,8 @@ function Naive_Methode(G, n):
     return(Permutation_0,Distance_0)  
 end function 
 ```
-La méthode de Held-Karp est décrite sur https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm, sa complexité est de
-<img src="https://render.githubusercontent.com/render/math?math=\large O(2^n n^2)">.
 
-On note les villes <img src="https://render.githubusercontent.com/render/math?math=\large \{1,2,..,n\}">et supposons que nous commençons à la ville 1, et on note G la matrice des distances entre les villes, Alors la distance entre la ville i et la ville j est <img src="https://render.githubusercontent.com/render/math?math=\large G_{i,j}"> .
-
-Considérons les sous-groupes <img src="https://render.githubusercontent.com/render/math?math=S\subseteq \{2,..,n\}">, et pour <img src="https://render.githubusercontent.com/render/math?math=\large k \in S">, soit <img src="https://render.githubusercontent.com/render/math?math=C(S,k)"> la distance minimale commençant à la ville 1 en visitant toutes les villes de S et se terminant à la ville k. 
-
-##### Première phase: Si <img src="https://render.githubusercontent.com/render/math?math=S=\{k\}">, alors <img src="https://render.githubusercontent.com/render/math?math=C(S,k) = G_{1,k}">. 
-#####                 Sinon: C(S,k)= min x∈{S-k} ( C( S-k,x) + G[x,k] ). (S-k i.e l'ensemble S sauf la ville k)
-
-##### Deuxième phase: la distance minimale pour un tour complet de toutes les villes est M = min k∈{2,..., N}( C({2,...,n},k) + G[k,1] ). 
+![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/imgs/image_1.png?raw=true "Optional Title")
 
 ```R
 function Held_Karp(G, n):
