@@ -1,3 +1,12 @@
+# Installer le package avec : 
+```R
+devtools::install_github("Groupe4-algorithmique/TSP")
+```
+# Importer le package avec :
+```R
+library("tspp")
+```
+
 # Problème du voyageur de commerce :
 #### Le dossier R, contient Un script R pour la méthode naïve et la méthode performante pour l'algorithme Held-Karp.
 #### 
