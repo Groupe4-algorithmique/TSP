@@ -1,4 +1,4 @@
-![Alt text](logo.jpg?raw=true "Optional Title")
+![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/logo.png?raw=true "Optional Title")
 
 
 # Installer le package avec : 
