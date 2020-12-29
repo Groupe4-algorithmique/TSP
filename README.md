@@ -23,7 +23,7 @@ function Naive_Methode(G, n):
 end function 
 ```
 
-![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/imgs/image_2.png?raw=true "Optional Title")
+![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/imgs/image_3.png?raw=true "Optional Title")
 
 ```R
 function Held_Karp(G, n):
