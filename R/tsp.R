@@ -86,6 +86,11 @@ naive_method <- function(G,cities,start_city){
 #' @param set : le groupe initial.
 #' @param p : la taille des partitions qu'on veut extraire de 'set'.
 #' @return L'ensemble des partitions de taille p du groupe 'set'.
+#' @usage compute_distance_Rcpp(G,cities,start_city)
+#' @examples 
+#' set = c(1,2,3,4,5,6,7)
+#' p = 2
+#' subsets = get_subsets_Rcpp(set,p) # on obtient tous les sous-groupes possbiles de taile 2 du vecteur c(1,2,3,4,5,6,7)
 .get_subsets <- function(set,p){
   subsets = list()
   for (i in 1:(2^length(set))){
@@ -125,7 +130,7 @@ naive_method <- function(G,cities,start_city){
 }
 
 #' @name  .search_min_C_S_k 
-#' @title (Fonction cachée) recherche du min dans un vecteur et son index.
+#' @title (Fonction cachée) recherche du min dans une liste et son index.
 #' @param C_S_k : Une liste construit par la fonction '.construct_C_S_k'.
 #' @return Le minimum du vecteur et l'index du minimum.
 .search_min_C_S_k <- function(C_S_k){
@@ -190,7 +195,7 @@ held_karp <- function(G,n){
     path_opt[k] = pr[row_S_k,path_opt[k-1]]
     subset_opt = subset_opt[subset_opt!=path_opt[k-1]]
   }
-  return(list(dist_opt=dist_opt,path_opt=rev(path_opt)))
+  return(list(dist_opt=dist_opt,path_opt=path_opt))
 }
 
 
