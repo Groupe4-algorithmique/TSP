@@ -7,7 +7,6 @@ devtools::install_github("Groupe4-algorithmique/TSP")
 library("tspp")
 ```
 
-![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/imgs/image_1.png?raw=true "Optional Title")
 ![image](https://drive.google.com/uc?export=view&id=1Gs2HnqyS3a49NCl7rAMmXHEOiqrIGBsI)
 ```R
 function Naive_Methode(G, n):
@@ -24,7 +23,7 @@ function Naive_Methode(G, n):
 end function 
 ```
 
-![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/imgs/image_3.png?raw=true "Optional Title")
+![image](https://drive.google.com/uc?export=view&id=1XmNh7Sz7Jf0X7x19JKtBGu_j6UVtAI5G)
 
 ```R
 function Held_Karp(G, n):
