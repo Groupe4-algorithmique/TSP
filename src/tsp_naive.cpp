@@ -15,6 +15,7 @@ using namespace Rcpp;
 //' ## la symétrie de G n'est pas nécessaire.
 //' start_city = 1 # la ville de Départ.
 //' cities = c(2,3,4) # un ordre de ville à visiter.
+//' distance = compute_distance_Rcpp(G,cities,start_city)
 // [[Rcpp::export]] //mandatory to export the function
 double compute_distance_Rcpp(NumericMatrix G,
                              NumericVector cities,
@@ -43,7 +44,7 @@ double compute_distance_Rcpp(NumericMatrix G,
 //' ## la symétrie de G n'est pas nécessaire.
 //' start_city = 1 # la ville de Départ.
 //' cities = c(2,3,4)  # un ordre de ville à visiter.
-//' results = naive_method(G,cities,start_city)
+//' results = naive_method_Rcpp(G,cities,start_city)
 //' results['path_optimal'] # l'ordre des villes optimales
 //' results['dist_optimal'] # la distance obtenue avec l'ordre des villes optimales.
 // [[Rcpp::export]] //mandatory to export the function
@@ -85,16 +86,6 @@ List naive_method_Rcpp(NumericMatrix G,
 }
 
 
-//' @name get_subsets_Rcpp
-//' @title  (Fonction cachée) Génère toutes les sous partitions de taille p d'un groupe de taille n.
-//' @param NumericVector set : le groupe initial.
-//' @param int p : la taille des partitions qu'on veut extraire de 'set'.
-//' @return List : L'ensemble des partitions de taille p du groupe 'set'.
-//' @usage compute_distance_Rcpp(G,cities,start_city)
-//' @examples 
-//' set = c(1,2,3,4,5,6,7)
-//' p = 2
-//' subsets = get_subsets_Rcpp(set,p) # on obtient tous les sous-groupes possibles de taille 2 du vecteur c(1,2,3,4,5,6,7)
 List get_subsets_Rcpp(NumericVector set, int p){
   List subsets;
   int n = set.size();
@@ -114,15 +105,7 @@ List get_subsets_Rcpp(NumericVector set, int p){
   return(subsets);
 }
 
-//' @name to_String
-//' @title (Fonction cachée) Convertir un vecteur en une chaîne de caractères.
-//' @param NumericVector v: le vecteur à convertir.
-//' @usage to_String(v)
-//' @return la chaîne de caractères associée au vecteur.
-//' @examples 
-//' v = c(1,2,3,4,5,6,7)
-//' v_string = to_String(v)
-//' print(v_string) # '1234567'
+
 String to_String(NumericVector v){
   String s("");
   int n = v.size();
@@ -133,15 +116,6 @@ String to_String(NumericVector v){
 }
 
 
-//' @name construct_C_S_k_Rcpp
-//' @title (Fonction cachée) Construire le vecteur (la liste \[C(S\{k\}, m) + G\[m,k\]\] pour tout m dans 'Subset')
-//' @param List C : la matrice tel que C\[S,k\] le coût min du chemin à partir de 1 et se termine au 
-//' #          sommet k, passant les sommets de l'ensemble S exactement une fois.
-//' @param NumericVector Subset : Un sous groupe du groupe complet des villes.
-//' @param int k : La ville pour laquelle on veut calculer C\[S-k,m\] pour tout m dans Subset.
-//' @param NumericMatrix G : la matrice des distances.
-//' @usage construct_C_S_k_Rcpp(C,Subset,k,G)
-//' @return (la liste \[C(S\{k\}, m) + G\[m,k\]\] pour tout m dans 'Subset')
 List construct_C_S_k_Rcpp(List C, NumericVector Subset,int k,NumericMatrix G){
   List C_S_k ;
   NumericVector S_k ;
@@ -164,11 +138,6 @@ List construct_C_S_k_Rcpp(List C, NumericVector Subset,int k,NumericMatrix G){
 }
 
 
-//' @name  search_min_C_S_k_Rcpp
-//' @title (Fonction cachée) recherche du min dans une liste et son index.
-//' @param List C_s_k : la liste construite par la fonction construct_C_S_k_Rcpp.
-//' @usage search_min_C_S_k_Rcpp(C_s_k)
-//' @return Le minimum de la liste et l'index du minimum.
 List search_min_C_S_k_Rcpp(List C_S_k){
   CharacterVector names = C_S_k.names();
   String m_0 = names[0];
@@ -185,18 +154,7 @@ List search_min_C_S_k_Rcpp(List C_S_k){
   return(L);
 }
 
-//' @name  element_index
-//' @title (Fonction cachée) l'index d'un element dans un vecteur. 
-//' @param NumericVector vec : un vecteur.
-//' @param int e : un element.
-//' @usage element_index(vec,e)
-//' @return Le minimum de la liste et l'index du minimum.
-//' @examples 
-//' v = c(11,2,31,4,25,6,71)
-//' e = 4
-//' index = element_index(v,e)
-//' print(index) # 3
-int element_index(NumericVector vec,int e){
+int delete_element(NumericVector vec,int e){
   int n = vec.size();
   NumericVector results(n-1);
   for(int i=0;i<n ;i=i+1){
@@ -207,11 +165,10 @@ int element_index(NumericVector vec,int e){
   return(-1);
 }
 
-
 //' @name  held_karp_Rcpp
 //' @title L'algorithme de Held_karp.
-//' @param NumericMatrix G : la matrice des distances.
-//' @param int n : le nombre de villes.
+//' @param G : la matrice des distances.
+//' @param n : le nombre de villes.
 //' @usage held_karp_Rcpp(G,n)
 //' @return La séquence des villes qui donnent la moindre en distance et la distance optimale.
 //' @examples 
@@ -219,12 +176,11 @@ int element_index(NumericVector vec,int e){
 //' G = G %*% t(G) # rendre G symétrique (n'est pas nécessaire.).
 //' diag(G) = 0 # annuler la diagonale de G.
 //' n = 4 # nombre de villes.
-//' results = held_karp(G,n)
+//' results = held_karp_Rcpp(G,n)
 //' results['path_opt'] # l'ordre optimale des villes.
 //' results['dist_opt'] # la distance totale optimale.
 // [[Rcpp::export]]
 List held_karp_Rcpp(NumericMatrix G, int n){
-  int a = std::numeric_limits<int>::max();
   List C ;
   List pr;
   NumericVector cities(n-1);
@@ -274,7 +230,7 @@ List held_karp_Rcpp(NumericMatrix G, int n){
     String row_S_k = to_String(subset_opt);
     NumericVector tmp_pr = pr[row_S_k];
     path_opt[k] = tmp_pr[path_opt[k-1]] ;
-    int i = element_index(subset_opt,path_opt[k-1]);
+    int i = delete_element(subset_opt,path_opt[k-1]);
     subset_opt.erase(i);
   }
   List L = List::create(Named("path_opt") = path_opt, _["dist_opt"] = dist_opt);
@@ -295,4 +251,6 @@ held_karp_Rcpp(a,n) # Rcpp
 print('-------------------------------------')
 naive_method(a,c(2:n),1) # R
 */
+
+
 
