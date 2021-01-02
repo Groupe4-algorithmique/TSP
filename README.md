@@ -8,7 +8,7 @@ library("tspp")
 ```
 
 ![Alt text](https://github.com/Groupe4-algorithmique/TSP/blob/main/imgs/image_1.png?raw=true "Optional Title")
-![image](https://drive.google.com/file/d/1Gs2HnqyS3a49NCl7rAMmXHEOiqrIGBsI/view?usp=sharing)
+![image](https://drive.google.com/uc?export=view&id=1Gs2HnqyS3a49NCl7rAMmXHEOiqrIGBsI)
 ```R
 function Naive_Methode(G, n):
     Permutation_0 = une permutation initiale.
