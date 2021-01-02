@@ -32,7 +32,7 @@ function Held_Karp(G, n):
       C({k}, k) := G[1, k] 
     end for 
     for s := 2 to n−1 do 
-        Subsets := get_subsets({2, . . . , n},s) /*recuperer tous les sous-groupes de taille s du groupe {2,. .,n} */
+        Subsets := get_subsets({2, . . . , n},s) /*récupérer tous les sous-groupes de taille s du groupe {2,. .,n} */
         for S in Subsets do 
           for k in S do 
               C(S, k) := min_{m≠k,m∈S} [C(S\{k}, m) + G[m,k] ]
