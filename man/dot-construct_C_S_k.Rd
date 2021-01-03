@@ -4,7 +4,7 @@
 \alias{.construct_C_S_k}
 \title{(Fonction cachée) Construire le vecteur (la liste [C(S{k}, m) + G[m,k]] pour tout m dans 'Subset')}
 \usage{
-.construct_C_S_k(C, Subset, k, G)
+.construct_C_S_k(C,Subset,k,G)
 }
 \arguments{
 \item{C}{: la matrice tel que C[S,k] le coût min du chemin à partir de 1 et se termine au 

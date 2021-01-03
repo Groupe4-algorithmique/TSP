@@ -22,9 +22,10 @@ double compute_distance_Rcpp(NumericMatrix G,
                              unsigned int start_city)
 {
   
-  int n = cities.size();
-  double distance = G(start_city,cities[0]);
+  int n = cities.size(); // Nombre des villes.
+  double distance = G(start_city,cities[0]);// la distance entre la ville de début et la ville qui suit.
   for ( int i =0 ; i<n-1 ; i = i+1){
+    // somme des distances des villes successifs.
     distance = distance + G(cities[i],cities[i+1]);
   }
   return(distance + G(cities[n-1],start_city));
@@ -85,7 +86,15 @@ List naive_method_Rcpp(NumericMatrix G,
   return(L);
 }
 
-
+/*
+//' @name get_subsets_Rcpp
+//' @title Créer les sous-groupes d'un groupe.
+//' @param set : la matrice des distances.
+//' @param p : vecteur des villes à visiter.
+//' @usage get_subsets_Rcpp(set,p)
+//' @return la liste des sous-groupes de taille p dans le groupe initial 'set'.
+ */
+// [[Rcpp::export(.get_subsets_Rcpp)]] //Fonction cachée
 List get_subsets_Rcpp(NumericVector set, int p){
   List subsets;
   int n = set.size();
@@ -106,6 +115,14 @@ List get_subsets_Rcpp(NumericVector set, int p){
 }
 
 
+/*
+ //' @name to_String
+ //' @title Convertir un vecteur numérique vers une chaîne de caractères.
+ //' @param p : Le vecteur à convertir.
+ //' @usage to_String(v)
+ //' @return la chaîne de caractères associée au vecteur d'entrée.
+ */
+// [[Rcpp::export(.to_String)]] //Fonction cachée
 String to_String(NumericVector v){
   String s("");
   int n = v.size();
@@ -115,7 +132,18 @@ String to_String(NumericVector v){
   return(s);
 }
 
-
+/*
+ //' @name construct_C_S_k 
+ //' @title Construire le vecteur (la liste [C(S{k}, m) + G[m,k]] pour tout m dans 'Subset')
+ //' @param C : la matrice tel que C[S,k] le coût min du chemin à partir de 1 et se termine au 
+ //' #          sommet k, passant les sommets de l'ensemble S exactement une fois.
+ //' @param Subset : Un sous groupe du groupe complet des villes.
+ //' @param k : La ville pour laquelle on veut calculer C[S-k,m] pour tout m dans Subset.
+ //' @param G : la matrice des distances.
+ //' @usage construct_C_S_k_Rcpp(C,Subset,k,G)
+ //' @return (la liste [C(S{k}, m) + G[m,k]] pour tout m dans 'Subset').
+ */
+// [[Rcpp::export(.construct_C_S_k_Rcpp)]] //Fonction cachée
 List construct_C_S_k_Rcpp(List C, NumericVector Subset,int k,NumericMatrix G){
   List C_S_k ;
   NumericVector S_k ;
@@ -137,7 +165,14 @@ List construct_C_S_k_Rcpp(List C, NumericVector Subset,int k,NumericMatrix G){
   return(C_S_k);
 }
 
-
+/*
+  //' @name  search_min_C_S_k_Rcpp 
+  //' @title recherche du min dans un vecteur et son index.
+  //' @param C_S_k : Une liste construit par la fonction 'construct_C_S_k_Rcpp'.
+  //' @usage search_min_C_S_k_Rcpp(C_S_k)
+  //' @return Le minimum du vecteur et l'index du minimum.
+*/
+// [[Rcpp::export(.search_min_C_S_k_Rcpp)]] //Fonction cachée
 List search_min_C_S_k_Rcpp(List C_S_k){
   CharacterVector names = C_S_k.names();
   String m_0 = names[0];
@@ -154,7 +189,16 @@ List search_min_C_S_k_Rcpp(List C_S_k){
   return(L);
 }
 
-int delete_element(NumericVector vec,int e){
+/*
+ //' @name  element_index 
+ //' @title recherche du min dans un vecteur et son index.
+ //' @param vec : Vecteur numérique.
+ //' @param e : un élément de même type que les éléments de 'vec'.
+ //' @usage element_index(vec,e)
+ //' @return L'index de l'élément 'e' dans le vecteur 'vec'.
+ */
+// [[Rcpp::export(.element_index)]] //Fonction cachée
+int element_index(NumericVector vec,int e){
   int n = vec.size();
   NumericVector results(n-1);
   for(int i=0;i<n ;i=i+1){
@@ -163,6 +207,18 @@ int delete_element(NumericVector vec,int e){
     }
   }
   return(-1);
+}
+
+/*
+ //' @name  char_to_int 
+ //' @title recherche du min dans un vecteur et son index.
+ //' @param c : Un entier de type caractères.
+ //' @usage char_to_int(c)
+ //' @return L'entier équivalent au caractère en entrée. 
+ */
+// [[Rcpp::export(.char_to_int)]] //Fonction cachée
+int char_to_int(char c){
+  return c-'0';
 }
 
 //' @name  held_karp_Rcpp
@@ -184,36 +240,30 @@ List held_karp_Rcpp(NumericMatrix G, int n){
   List C ;
   List pr;
   NumericVector cities(n-1);
-  for (int p =0;p <n-1;p =p+1){
+  for (int p  = 0; p < n-1 ; p =p+1){
     cities[p] = p+1 ;
   }
-  for (int k=1; k<n; k++){
-    NumericVector tmp(n);
-    tmp.fill(R_PosInf);
+  NumericVector v(1);
+  for (int k=1; k < n ; k++){
+    NumericVector tmp(n , R_PosInf);
     tmp[k] = G(0,k);
-    NumericVector v(1);
     v[0] = k;
     String s = to_String(v);
     C.push_back(tmp ,s);
   }
-  for(int s=2 ; s < n ; s=s+1){
+  for(int s = 2 ; s < n ; s=s+1){
     List subSets = get_subsets_Rcpp(cities,s);
-    int n_subsets = subSets.size();
-    for(int y = 0; y < n_subsets; y=y+1){
+    for(int y = 0; y < subSets.size(); y=y+1){
       NumericVector S = subSets[y];
-      String name_S = to_String(S);
-      NumericVector tmp_1(n);
-      tmp_1.fill(R_PosInf);
-      NumericVector tmp_2(n);
-      tmp_2.fill(R_PosInf);
-      int n_s = S.size();
-      for (int k=0 ; k<n_s ; k=k+1){
-        double k_S= S[k];
+      String name_S = to_String(subSets[y]);
+      NumericVector tmp_1(n , R_PosInf);
+      NumericVector tmp_2(n , R_PosInf);
+      for (int k=0 ; k < S.size() ; k=k+1){
+        int k_S= S[k];
         List C_S_k = construct_C_S_k_Rcpp(C,S,k_S,G);
         List tmp = search_min_C_S_k_Rcpp(C_S_k);
-        tmp_1[k_S] = tmp["c_s_k"];
-        char c = tmp["m"];
-        tmp_2[k_S] = c - '0';
+        tmp_1[k_S] =  tmp["c_s_k"];
+        tmp_2[k_S] =  char_to_int(tmp["m"]);
       }
       C.push_back(tmp_1 , name_S);
       pr.push_back(tmp_2 , name_S);
@@ -221,22 +271,19 @@ List held_karp_Rcpp(NumericMatrix G, int n){
   }
   List C_S_1  = construct_C_S_k_Rcpp(C,cities,0,G);
   List min_tmp  = search_min_C_S_k_Rcpp(C_S_1);
-  char c = min_tmp["m"];
   double dist_opt = min_tmp["c_s_k"];
   NumericVector path_opt(n-1);
-  path_opt[0]= c - '0';
-  NumericVector subset_opt = cities;
-  for (int k=1;k<n-1;k=k+1){
-    String row_S_k = to_String(subset_opt);
+  path_opt[0] = char_to_int(min_tmp["m"]);
+  for (int k=1; k<n-1; k=k+1){
+    String row_S_k = to_String(cities);
     NumericVector tmp_pr = pr[row_S_k];
     path_opt[k] = tmp_pr[path_opt[k-1]] ;
-    int i = delete_element(subset_opt,path_opt[k-1]);
-    subset_opt.erase(i);
+    int i = element_index(cities,path_opt[k-1]);
+    cities.erase(i);
   }
   List L = List::create(Named("path_opt") = path_opt, _["dist_opt"] = dist_opt);
   return(L);
 }
-
 
 
 

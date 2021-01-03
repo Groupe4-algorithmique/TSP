@@ -31,6 +31,77 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// get_subsets_Rcpp
+List get_subsets_Rcpp(NumericVector set, int p);
+RcppExport SEXP _tspp_get_subsets_Rcpp(SEXP setSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type set(setSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_subsets_Rcpp(set, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// to_String
+String to_String(NumericVector v);
+RcppExport SEXP _tspp_to_String(SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(to_String(v));
+    return rcpp_result_gen;
+END_RCPP
+}
+// construct_C_S_k_Rcpp
+List construct_C_S_k_Rcpp(List C, NumericVector Subset, int k, NumericMatrix G);
+RcppExport SEXP _tspp_construct_C_S_k_Rcpp(SEXP CSEXP, SEXP SubsetSEXP, SEXP kSEXP, SEXP GSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type C(CSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Subset(SubsetSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type G(GSEXP);
+    rcpp_result_gen = Rcpp::wrap(construct_C_S_k_Rcpp(C, Subset, k, G));
+    return rcpp_result_gen;
+END_RCPP
+}
+// search_min_C_S_k_Rcpp
+List search_min_C_S_k_Rcpp(List C_S_k);
+RcppExport SEXP _tspp_search_min_C_S_k_Rcpp(SEXP C_S_kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type C_S_k(C_S_kSEXP);
+    rcpp_result_gen = Rcpp::wrap(search_min_C_S_k_Rcpp(C_S_k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// element_index
+int element_index(NumericVector vec, int e);
+RcppExport SEXP _tspp_element_index(SEXP vecSEXP, SEXP eSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type vec(vecSEXP);
+    Rcpp::traits::input_parameter< int >::type e(eSEXP);
+    rcpp_result_gen = Rcpp::wrap(element_index(vec, e));
+    return rcpp_result_gen;
+END_RCPP
+}
+// char_to_int
+int char_to_int(char c);
+RcppExport SEXP _tspp_char_to_int(SEXP cSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< char >::type c(cSEXP);
+    rcpp_result_gen = Rcpp::wrap(char_to_int(c));
+    return rcpp_result_gen;
+END_RCPP
+}
 // held_karp_Rcpp
 List held_karp_Rcpp(NumericMatrix G, int n);
 RcppExport SEXP _tspp_held_karp_Rcpp(SEXP GSEXP, SEXP nSEXP) {
@@ -47,6 +118,12 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_tspp_compute_distance_Rcpp", (DL_FUNC) &_tspp_compute_distance_Rcpp, 3},
     {"_tspp_naive_method_Rcpp", (DL_FUNC) &_tspp_naive_method_Rcpp, 3},
+    {"_tspp_get_subsets_Rcpp", (DL_FUNC) &_tspp_get_subsets_Rcpp, 2},
+    {"_tspp_to_String", (DL_FUNC) &_tspp_to_String, 1},
+    {"_tspp_construct_C_S_k_Rcpp", (DL_FUNC) &_tspp_construct_C_S_k_Rcpp, 4},
+    {"_tspp_search_min_C_S_k_Rcpp", (DL_FUNC) &_tspp_search_min_C_S_k_Rcpp, 1},
+    {"_tspp_element_index", (DL_FUNC) &_tspp_element_index, 2},
+    {"_tspp_char_to_int", (DL_FUNC) &_tspp_char_to_int, 1},
     {"_tspp_held_karp_Rcpp", (DL_FUNC) &_tspp_held_karp_Rcpp, 2},
     {NULL, NULL, 0}
 };

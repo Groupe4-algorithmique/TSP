@@ -41,6 +41,30 @@ naive_method_Rcpp <- function(G, cities, start_city) {
     .Call(`_tspp_naive_method_Rcpp`, G, cities, start_city)
 }
 
+.get_subsets_Rcpp <- function(set, p) {
+    .Call(`_tspp_get_subsets_Rcpp`, set, p)
+}
+
+.to_String <- function(v) {
+    .Call(`_tspp_to_String`, v)
+}
+
+.construct_C_S_k_Rcpp <- function(C, Subset, k, G) {
+    .Call(`_tspp_construct_C_S_k_Rcpp`, C, Subset, k, G)
+}
+
+.search_min_C_S_k_Rcpp <- function(C_S_k) {
+    .Call(`_tspp_search_min_C_S_k_Rcpp`, C_S_k)
+}
+
+.element_index <- function(vec, e) {
+    .Call(`_tspp_element_index`, vec, e)
+}
+
+.char_to_int <- function(c) {
+    .Call(`_tspp_char_to_int`, c)
+}
+
 #' @name  held_karp_Rcpp
 #' @title L'algorithme de Held_karp.
 #' @param G : la matrice des distances.

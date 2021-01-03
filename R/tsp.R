@@ -110,6 +110,7 @@ naive_method <- function(G,cities,start_city){
 #' @param Subset : Un sous groupe du groupe complet des villes.
 #' @param k : La ville pour laquelle on veut calculer C[S-k,m] pour tout m dans Subset.
 #' @param G : la matrice des distances.
+#' @usage .construct_C_S_k(C,Subset,k,G)
 #' @return (la liste [C(S{k}, m) + G[m,k]] pour tout m dans 'Subset')
 .construct_C_S_k <- function(C,Subset,k,G){
   C_S_k = list()
@@ -317,13 +318,13 @@ time_compare <- function(min_cities,max_cities){
     naive_method_time = c(naive_method_time,time_nv['elapsed'])
   }
   df = as.data.frame(cbind(held_karp_time,naive_method_time,n))
-  p <- ggplot2::ggplot(df)+
+  p <- ggplot2::ggplot(df) +
     ggplot2::geom_line(ggplot2::aes(n,naive_method_time , colour="green"))+
     ggplot2::geom_line(ggplot2::aes(n,held_karp_time, colour="red"))+  
     ggplot2::scale_color_discrete(name = "Algorithmes", labels = c("Naive", "Held-Karp")) + 
     ggplot2::xlab("Nombre de villes") + ggplot2::ylab("Temps en (seconds)")
   print(p)
-
+  
   return(list(naive_method = naive_method_time , held_karp= held_karp_time))
 }
 
