@@ -287,17 +287,3 @@ List held_karp_Rcpp(NumericMatrix G, int n){
 
 
 
-/*** R
-n = 7
-a = matrix(runif(n*n,10,100),nrow=n,ncol=n)
-a = a %*% t(a)
-diag(a)=0
-held_karp(a,n) # R 
-print('-------------------------------------')
-held_karp_Rcpp(a,n) # Rcpp
-print('-------------------------------------')
-naive_method(a,c(2:n),1) # R
-*/
-
-
-
