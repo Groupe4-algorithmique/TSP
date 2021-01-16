@@ -57,7 +57,7 @@ List naive_method_Rcpp(NumericMatrix G,
   NumericVector c(n);
   int i = 0;
   double dist_optimal = compute_distance_Rcpp(G,cities,start_city);
-  NumericVector path_optimal = cities;
+  NumericVector path_optimal = clone(cities);
   while( i < n){
     if (c[i] < i){
       if (i %2 == 0){
@@ -70,9 +70,10 @@ List naive_method_Rcpp(NumericMatrix G,
         cities[c[i]] = cities[i];
         cities[i] = tmp;
       }
+      //Rcpp::print(cities);
       double tmp_dist = compute_distance_Rcpp(G,cities,start_city);
       if ( tmp_dist < dist_optimal){
-        path_optimal = cities;
+        path_optimal = clone(cities);
         dist_optimal = compute_distance_Rcpp(G,cities,start_city);
       }
       c[i] = c[i] + 1 ;
@@ -301,4 +302,14 @@ List held_karp_Rcpp(NumericMatrix G, int n){
   return(L);
 }
 
+/*** R
+n = 12
+G = matrix(runif(n*n, 10 , 20))
+G = G %*% t(G)
+diag(G) = 0
+cities = c(1:(n-1))
+start_city = 0
+naive_method_Rcpp(G, cities ,start_city )
+held_karp_Rcpp(G,n)
 
+*/
