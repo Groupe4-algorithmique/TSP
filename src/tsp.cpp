@@ -83,7 +83,7 @@ List naive_method_Rcpp(NumericMatrix G,
       i = i+1;
     }
   }
-  List L = List::create(Named("path_optimal")=path_optimal,Named("dist_optimal")=dist_optimal);
+  List L = List::create(Named("path_opt")=path_optimal,Named("dist_opt")=dist_optimal);
   return(L);
 }
 
