@@ -190,35 +190,43 @@ List search_min_C_S_k_Rcpp(List C_S_k){
 }
 
 /*
- //' @name  element_index 
- //' @title recherche du min dans un vecteur et son index.
+ //' @name  delete_element 
+ //' @title supprimer un élément dans un vecteur
  //' @param vec : Vecteur numérique.
  //' @param e : un élément de même type que les éléments de 'vec'.
- //' @usage element_index(vec,e)
- //' @return L'index de l'élément 'e' dans le vecteur 'vec'.
+ //' @usage delete_element(vec,e)
+ //' @return Un nouveau vecteur sans l'élément 'el'.
  */
-// [[Rcpp::export(.element_index)]] //Fonction cachée
-int element_index(NumericVector vec,int e){
+// [[Rcpp::export(delete_element)]] //Fonction cachée
+NumericVector delete_element(NumericVector vec,int el){
   int n = vec.size();
-  NumericVector results(n-1);
+  NumericVector results(0);
   for(int i=0;i<n ;i=i+1){
-    if (vec[i] == e){
-      return(i);
+    if (vec[i] != el){
+      results.push_back(vec[i]);
     }
   }
-  return(-1);
+  return(results);
 }
 
+
 /*
- //' @name  char_to_int 
+ //' @name  str_to_int 
  //' @title recherche du min dans un vecteur et son index.
- //' @param c : Un entier de type caractères.
- //' @usage char_to_int(c)
- //' @return L'entier équivalent au caractère en entrée. 
+ //' @param numStr : Une chaîne de caractères (String).
+ //' @usage str_to_int(numStr)
+ //' @return L'entier équivalent au String. 
  */
-// [[Rcpp::export(.char_to_int)]] //Fonction cachée
-int char_to_int(char c){
-  return c-'0';
+// [[Rcpp::export(.str_to_int)]] //Fonction cachée
+int str_to_int(String numStr){
+  std::string s = numStr.get_cstring(); 
+  int nlen = s.size();
+  int results = 0;
+  for(int i=0 ; i<nlen ; i = i +1){
+    int sm = s[i] -'0';
+    results = results + sm*pow(10,nlen-i-1);
+  }
+  return results;
 }
 
 //' @name  held_karp_Rcpp
@@ -262,8 +270,10 @@ List held_karp_Rcpp(NumericMatrix G, int n){
         int k_S= S[k];
         List C_S_k = construct_C_S_k_Rcpp(C,S,k_S,G);
         List tmp = search_min_C_S_k_Rcpp(C_S_k);
+        //Rcpp::print(tmp);
         tmp_1[k_S] =  tmp["c_s_k"];
-        tmp_2[k_S] =  char_to_int(tmp["m"]);
+        String ss = tmp["m"];
+        tmp_2[k_S] = str_to_int(ss);
       }
       C.push_back(tmp_1 , name_S);
       pr.push_back(tmp_2 , name_S);
@@ -273,13 +283,12 @@ List held_karp_Rcpp(NumericMatrix G, int n){
   List min_tmp  = search_min_C_S_k_Rcpp(C_S_1);
   double dist_opt = min_tmp["c_s_k"];
   NumericVector path_opt(n-1);
-  path_opt[0] = char_to_int(min_tmp["m"]);
+  path_opt[0] = str_to_int(min_tmp["m"]); //
   for (int k=1; k<n-1; k=k+1){
     String row_S_k = to_String(cities);
     NumericVector tmp_pr = pr[row_S_k];
-    path_opt[k] = tmp_pr[path_opt[k-1]] ;
-    int i = element_index(cities,path_opt[k-1]);
-    cities.erase(i);
+    path_opt[k] = tmp_pr[path_opt[k-1]];
+    cities = delete_element(cities,path_opt[k-1]);
   }
   List L = List::create(Named("path_opt") = path_opt, _["dist_opt"] = dist_opt);
   return(L);
