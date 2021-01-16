@@ -57,12 +57,12 @@ naive_method_Rcpp <- function(G, cities, start_city) {
     .Call(`_tspp_search_min_C_S_k_Rcpp`, C_S_k)
 }
 
-.element_index <- function(vec, e) {
-    .Call(`_tspp_element_index`, vec, e)
+.delete_element <- function(vec, el) {
+    .Call(`_tspp_delete_element`, vec, el)
 }
 
-.char_to_int <- function(c) {
-    .Call(`_tspp_char_to_int`, c)
+.str_to_int <- function(numStr) {
+    .Call(`_tspp_str_to_int`, numStr)
 }
 
 #' @name  held_karp_Rcpp

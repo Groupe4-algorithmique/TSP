@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+
 using namespace Rcpp;
 
 //' @name compute_distance_Rcpp
@@ -126,8 +127,13 @@ List get_subsets_Rcpp(NumericVector set, int p){
 String to_String(NumericVector v){
   String s("");
   int n = v.size();
+  if (n == 1){
+    s.push_back(v[0]);
+    return(s);
+  }
   for (int i=0;i<n;i=i+1){
     s.push_back(v[i]);
+    s.push_back("-");
   }
   return(s);
 }
@@ -189,6 +195,7 @@ List search_min_C_S_k_Rcpp(List C_S_k){
   return(L);
 }
 
+
 /*
  //' @name  delete_element 
  //' @title supprimer un élément dans un vecteur
@@ -197,7 +204,7 @@ List search_min_C_S_k_Rcpp(List C_S_k){
  //' @usage delete_element(vec,e)
  //' @return Un nouveau vecteur sans l'élément 'el'.
  */
-// [[Rcpp::export(delete_element)]] //Fonction cachée
+// [[Rcpp::export(.delete_element)]] //Fonction cachée
 NumericVector delete_element(NumericVector vec,int el){
   int n = vec.size();
   NumericVector results(0);
@@ -293,6 +300,5 @@ List held_karp_Rcpp(NumericMatrix G, int n){
   List L = List::create(Named("path_opt") = path_opt, _["dist_opt"] = dist_opt);
   return(L);
 }
-
 
 

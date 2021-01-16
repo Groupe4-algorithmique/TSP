@@ -79,26 +79,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// element_index
-int element_index(NumericVector vec, int e);
-RcppExport SEXP _tspp_element_index(SEXP vecSEXP, SEXP eSEXP) {
+// delete_element
+NumericVector delete_element(NumericVector vec, int el);
+RcppExport SEXP _tspp_delete_element(SEXP vecSEXP, SEXP elSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type vec(vecSEXP);
-    Rcpp::traits::input_parameter< int >::type e(eSEXP);
-    rcpp_result_gen = Rcpp::wrap(element_index(vec, e));
+    Rcpp::traits::input_parameter< int >::type el(elSEXP);
+    rcpp_result_gen = Rcpp::wrap(delete_element(vec, el));
     return rcpp_result_gen;
 END_RCPP
 }
-// char_to_int
-int char_to_int(char c);
-RcppExport SEXP _tspp_char_to_int(SEXP cSEXP) {
+// str_to_int
+int str_to_int(String numStr);
+RcppExport SEXP _tspp_str_to_int(SEXP numStrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< char >::type c(cSEXP);
-    rcpp_result_gen = Rcpp::wrap(char_to_int(c));
+    Rcpp::traits::input_parameter< String >::type numStr(numStrSEXP);
+    rcpp_result_gen = Rcpp::wrap(str_to_int(numStr));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -122,8 +122,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_tspp_to_String", (DL_FUNC) &_tspp_to_String, 1},
     {"_tspp_construct_C_S_k_Rcpp", (DL_FUNC) &_tspp_construct_C_S_k_Rcpp, 4},
     {"_tspp_search_min_C_S_k_Rcpp", (DL_FUNC) &_tspp_search_min_C_S_k_Rcpp, 1},
-    {"_tspp_element_index", (DL_FUNC) &_tspp_element_index, 2},
-    {"_tspp_char_to_int", (DL_FUNC) &_tspp_char_to_int, 1},
+    {"_tspp_delete_element", (DL_FUNC) &_tspp_delete_element, 2},
+    {"_tspp_str_to_int", (DL_FUNC) &_tspp_str_to_int, 1},
     {"_tspp_held_karp_Rcpp", (DL_FUNC) &_tspp_held_karp_Rcpp, 2},
     {NULL, NULL, 0}
 };

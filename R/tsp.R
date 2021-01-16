@@ -190,7 +190,7 @@ held_karp <- function(G,n){
     path_opt[k] = pr[row_S_k,path_opt[k-1]]
     subset_opt = subset_opt[subset_opt!=path_opt[k-1]]
   }
-  return(list(dist_opt=dist_opt,path_opt=rev(path_opt)))
+  return(list(dist_opt=dist_opt,path_opt=path_opt))
 }
 
 
