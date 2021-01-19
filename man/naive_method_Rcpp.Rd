@@ -24,8 +24,8 @@ G = matrix(runif(4*4 , min = 10, max = 50),nrow=4)
 G = G \%*\% t(G) # rendre G symétrique (n'est pas nécessaire.)
 diag(G) = 0 # annuler la diagonale de G
 ## la symétrie de G n'est pas nécessaire.
-start_city = 1 # la ville de Départ.
-cities = c(2,3,4)  # un ordre de ville à visiter.
+start_city = 0 # la ville de Départ.
+cities = c(1,2,3)  # un ordre de ville à visiter.
 results = naive_method_Rcpp(G,cities,start_city)
 results['path_optimal'] # l'ordre des villes optimales
 results['dist_optimal'] # la distance obtenue avec l'ordre des villes optimales.

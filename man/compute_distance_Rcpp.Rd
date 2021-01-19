@@ -24,7 +24,7 @@ G = matrix(runif(4*4,min=10,max=50),nrow=4,ncol=4)
 G = G \%*\% t(G) # rendre G symétrique
 diag(G) = 0 # annuler la diagonale de G
 ## la symétrie de G n'est pas nécessaire.
-start_city = 1 # la ville de Départ.
-cities = c(2,3,4) # un ordre de ville à visiter.
+start_city = 0 # la ville de Départ.
+cities = c(1,2,3) # un ordre de ville à visiter.
 distance = compute_distance_Rcpp(G,cities,start_city)
 }
