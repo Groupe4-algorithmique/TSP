@@ -2,7 +2,7 @@
 % Please edit documentation in R/tsp.R
 \name{naive_method}
 \alias{naive_method}
-\title{Test de toutes les permutations possibles.}
+\title{Test de toutes les permutations possibles en R.}
 \usage{
 naive_method(G,cities,start_city)
 }
@@ -17,7 +17,7 @@ naive_method(G,cities,start_city)
 La séquence des villes qui donnent la moindre en distance.
 }
 \description{
-Test de toutes les permutations possibles.
+Test de toutes les permutations possibles en R.
 }
 \examples{
 G = matrix(runif(4*4 , min = 10, max = 50),nrow=4)

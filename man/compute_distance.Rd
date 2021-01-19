@@ -2,7 +2,7 @@
 % Please edit documentation in R/tsp.R
 \name{compute_distance}
 \alias{compute_distance}
-\title{calcul de distance selon un ordre de villes.}
+\title{calcul de distance selon un ordre de villes en R.}
 \usage{
 compute_distance(G,cities,start_city)
 }
@@ -17,7 +17,7 @@ compute_distance(G,cities,start_city)
 La distance totale parcourue en commençant par 'start_city' et visitant 'cities' et terminant en 'start_city'.
 }
 \description{
-calcul de distance selon un ordre de villes.
+calcul de distance selon un ordre de villes en R.
 }
 \examples{
 G = matrix(runif(4*4,min=10,max=50),nrow=4,ncol=4)

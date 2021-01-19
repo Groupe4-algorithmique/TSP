@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{naive_method_Rcpp}
 \alias{naive_method_Rcpp}
-\title{Test de toutes les permutations possibles.}
+\title{Test de toutes les permutations possibles en Rcpp.}
 \usage{
 naive_method_Rcpp(G,cities,start_city)
 }
@@ -17,7 +17,7 @@ naive_method_Rcpp(G,cities,start_city)
 la séquence des villes qui donnent la moindre en distance.
 }
 \description{
-Test de toutes les permutations possibles.
+Test de toutes les permutations possibles en Rcpp.
 }
 \examples{
 G = matrix(runif(4*4 , min = 10, max = 50),nrow=4)

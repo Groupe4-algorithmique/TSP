@@ -1,5 +1,5 @@
 #' @name compute_distance
-#' @title calcul de distance selon un ordre de villes.
+#' @title calcul de distance selon un ordre de villes en R.
 #' @param G : la matrice des distances.
 #' @param cities : vecteur des villes à visiter.
 #' @param start_city : la ville de début du voyage.
@@ -23,7 +23,7 @@ compute_distance <- function(G,cities,start_city){
 }
 
 #' @name  naive_method
-#' @title Test de toutes les permutations possibles.
+#' @title Test de toutes les permutations possibles en R.
 #' @param G : la matrice des distances.
 #' @param cities : vecteur des villes à visiter.
 #' @param start_city : la ville de début du voyage.
@@ -139,7 +139,7 @@ naive_method <- function(G,cities,start_city){
 }
 
 #' @name  held_karp
-#' @title L'algorithme de Held_karp.
+#' @title L'algorithme de Held_karp en R.
 #' @param G : la matrice des distances.
 #' @param n : le nombre de villes.
 #' @usage held_karp(G,n)

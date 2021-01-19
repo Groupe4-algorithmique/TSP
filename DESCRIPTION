@@ -1,13 +1,13 @@
 Package: tspp
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
+Title: Le problème du voyageur de commerce en utilisant Held-Karp et la méthode Naïve
 Version: 1.0
 Date: 2020-12-12
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one or more full sentences.
+Author: Taleb Abdoulah, Imad Bouhou
+Maintainer: Taleb Abdoulah <taleb.abdoulah@gmail.com>, Imad Bouhou <im.bouhou@gmail.com>
+Description: Ce Package contient les deux algorithmes Held-Karp et la méthode naïve pour le problème du voyageur de commerce en R et Rcpp.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.5) ,ggplot2 (>= 3.3.2)
+Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp
 Encoding: UTF-8
 RoxygenNote: 7.1.1

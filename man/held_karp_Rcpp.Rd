@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{held_karp_Rcpp}
 \alias{held_karp_Rcpp}
-\title{L'algorithme de Held_karp.}
+\title{L'algorithme de Held_karp en Rcpp.}
 \usage{
 held_karp_Rcpp(G,n)
 }
@@ -15,7 +15,7 @@ held_karp_Rcpp(G,n)
 La séquence des villes qui donnent la moindre en distance et la distance optimale.
 }
 \description{
-L'algorithme de Held_karp.
+L'algorithme de Held_karp en Rcpp.
 }
 \examples{
 G = matrix(runif(4*4 , min = 10, max = 50),nrow=4)

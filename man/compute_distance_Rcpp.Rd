@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{compute_distance_Rcpp}
 \alias{compute_distance_Rcpp}
-\title{calcul de distance selon un ordre de villes.}
+\title{calcul de distance selon un ordre de villes en Rcpp.}
 \usage{
 compute_distance_Rcpp(G,cities,start_city)
 }
@@ -17,7 +17,7 @@ compute_distance_Rcpp(G,cities,start_city)
 la distance totale parcourue
 }
 \description{
-calcul de distance selon un ordre de villes.
+calcul de distance selon un ordre de villes en Rcpp.
 }
 \examples{
 G = matrix(runif(4*4,min=10,max=50),nrow=4,ncol=4)

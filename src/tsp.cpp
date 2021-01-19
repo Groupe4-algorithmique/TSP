@@ -3,7 +3,7 @@
 using namespace Rcpp;
 
 //' @name compute_distance_Rcpp
-//' @title calcul de distance selon un ordre de villes.
+//' @title calcul de distance selon un ordre de villes en Rcpp.
 //' @param G : la matrice des distances.
 //' @param cities : vecteur des villes à visiter.
 //' @param start_city : la ville de début du voyage.
@@ -33,7 +33,7 @@ double compute_distance_Rcpp(NumericMatrix G,
 }
 
 //' @name  naive_method_Rcpp
-//' @title Test de toutes les permutations possibles.
+//' @title Test de toutes les permutations possibles en Rcpp.
 //' @param G : la matrice des distances.
 //' @param cities : vecteur des villes à visiter.
 //' @param start_city : la ville de début du voyage.
@@ -238,7 +238,7 @@ int str_to_int(String numStr){
 }
 
 //' @name  held_karp_Rcpp
-//' @title L'algorithme de Held_karp.
+//' @title L'algorithme de Held_karp en Rcpp.
 //' @param G : la matrice des distances.
 //' @param n : le nombre de villes.
 //' @usage held_karp_Rcpp(G,n)
@@ -302,14 +302,4 @@ List held_karp_Rcpp(NumericMatrix G, int n){
   return(L);
 }
 
-/*** R
-n = 12
-G = matrix(runif(n*n, 10 , 20))
-G = G %*% t(G)
-diag(G) = 0
-cities = c(1:(n-1))
-start_city = 0
-naive_method_Rcpp(G, cities ,start_city )
-held_karp_Rcpp(G,n)
 
-*/

@@ -2,7 +2,7 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @name compute_distance_Rcpp
-#' @title calcul de distance selon un ordre de villes.
+#' @title calcul de distance selon un ordre de villes en Rcpp.
 #' @param G : la matrice des distances.
 #' @param cities : vecteur des villes à visiter.
 #' @param start_city : la ville de début du voyage.
@@ -21,7 +21,7 @@ compute_distance_Rcpp <- function(G, cities, start_city) {
 }
 
 #' @name  naive_method_Rcpp
-#' @title Test de toutes les permutations possibles.
+#' @title Test de toutes les permutations possibles en Rcpp.
 #' @param G : la matrice des distances.
 #' @param cities : vecteur des villes à visiter.
 #' @param start_city : la ville de début du voyage.
@@ -66,7 +66,7 @@ naive_method_Rcpp <- function(G, cities, start_city) {
 }
 
 #' @name  held_karp_Rcpp
-#' @title L'algorithme de Held_karp.
+#' @title L'algorithme de Held_karp en Rcpp.
 #' @param G : la matrice des distances.
 #' @param n : le nombre de villes.
 #' @usage held_karp_Rcpp(G,n)

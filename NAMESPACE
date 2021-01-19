@@ -1,6 +1,4 @@
 useDynLib(tspp, .registration=TRUE)
 importFrom(Rcpp, evalCpp)
-importFrom("graphics", "points", "text")
-importFrom("stats", "runif")
 importFrom("tools", "showNonASCII")
 exportPattern("^[[:alpha:]]+")

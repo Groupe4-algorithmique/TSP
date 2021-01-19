@@ -2,7 +2,7 @@
 % Please edit documentation in R/tsp.R
 \name{held_karp}
 \alias{held_karp}
-\title{L'algorithme de Held_karp.}
+\title{L'algorithme de Held_karp en R.}
 \usage{
 held_karp(G,n)
 }
@@ -15,7 +15,7 @@ held_karp(G,n)
 La séquence des villes qui donnent la moindre en distance et la distance optimale.
 }
 \description{
-L'algorithme de Held_karp.
+L'algorithme de Held_karp en R.
 }
 \examples{
 G = matrix(runif(4*4 , min = 10, max = 50),nrow=4)
