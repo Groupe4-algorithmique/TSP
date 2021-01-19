@@ -35,8 +35,8 @@ compute_distance_Rcpp <- function(G, cities, start_city) {
 #' start_city = 0 # la ville de Départ.
 #' cities = c(1,2,3)  # un ordre de ville à visiter.
 #' results = naive_method_Rcpp(G,cities,start_city)
-#' results['path_optimal'] # l'ordre des villes optimales
-#' results['dist_optimal'] # la distance obtenue avec l'ordre des villes optimales.
+#' results['path_opt'] # l'ordre des villes optimales
+#' results['dist_opt'] # la distance obtenue avec l'ordre des villes optimales.
 naive_method_Rcpp <- function(G, cities, start_city) {
     .Call(`_tspp_naive_method_Rcpp`, G, cities, start_city)
 }

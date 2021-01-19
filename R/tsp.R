@@ -36,8 +36,8 @@ compute_distance <- function(G,cities,start_city){
 #' start_city = 1 # la ville de Départ.
 #' cities = c(2,3,4)  # un ordre de ville à visiter.
 #' results = naive_method(G,cities,start_city)
-#' results['path_optimal'] # l'ordre des villes optimales.
-#' results['dist_optimal'] # la distance obtenue avec l'ordre des villes optimales.
+#' results['path_opt'] # l'ordre des villes optimales.
+#' results['dist_opt'] # la distance obtenue avec l'ordre des villes optimales.
 naive_method <- function(G,cities,start_city){
   if (start_city %in% cities){
     stop(showNonASCII(paste("'start_city' :",start_city," ne doit pas \u00EAtre dans 'cities' :",toString(cities))))

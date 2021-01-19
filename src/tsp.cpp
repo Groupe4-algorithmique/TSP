@@ -47,8 +47,8 @@ double compute_distance_Rcpp(NumericMatrix G,
 //' start_city = 0 # la ville de Départ.
 //' cities = c(1,2,3)  # un ordre de ville à visiter.
 //' results = naive_method_Rcpp(G,cities,start_city)
-//' results['path_optimal'] # l'ordre des villes optimales
-//' results['dist_optimal'] # la distance obtenue avec l'ordre des villes optimales.
+//' results['path_opt'] # l'ordre des villes optimales
+//' results['dist_opt'] # la distance obtenue avec l'ordre des villes optimales.
 // [[Rcpp::export]] //mandatory to export the function
 List naive_method_Rcpp(NumericMatrix G,
                   NumericVector cities,
