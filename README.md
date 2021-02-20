@@ -8,7 +8,7 @@ library("tspp")
 ```
 
 
-![image](https://drive.google.com/uc?export=view&id=1Gs2HnqyS3a49NCl7rAMmXHEOiqrIGBsI)
+![image](https://drive.google.com/uc?export=view&id=1AWaFDHf5BXQOk7-zvoPaM-5ikvCYf0pg)
 ```R
 function Naive_Methode(G, n):
     Permutation_0 = une permutation initiale.
