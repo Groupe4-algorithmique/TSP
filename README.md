@@ -24,7 +24,7 @@ function Naive_Methode(G, n):
 end function 
 ```
 
-![image](https://drive.google.com/uc?export=view&id=1XmNh7Sz7Jf0X7x19JKtBGu_j6UVtAI5G)
+![image](https://drive.google.com/uc?export=view&id=1vXMBvLagmAiioq0gRQjl9U1g48XESeio)
 
 ```R
 function Held_Karp(G, n):
@@ -43,5 +43,5 @@ function Held_Karp(G, n):
     return (opt) 
  end function 
 ```
-![image](https://drive.google.com/uc?export=view&id=146mzXEs1PokHImDgDCpSOnZVqiqi9eoO)
+![image](https://drive.google.com/uc?export=view&id=1AN7wR8I1_A_w8ule0C91hmyBb-_-NnSn)
 
